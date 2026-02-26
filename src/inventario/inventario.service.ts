@@ -5,8 +5,9 @@ import { ProductosService } from 'src/productos/productos.service';
 
 @Injectable()
 export class InventarioService {
+
   //Inyectar el servicio de productos para poder usarlo en el inventario
-  constructor(private readonly productosService: ProductosService) {}
+  constructor(private readonly productosService: ProductosService) { }
 
   create(createInventarioDto: CreateInventarioDto) {
     return 'This action adds a new inventario';
@@ -20,12 +21,9 @@ export class InventarioService {
     return `This action returns a #${id} inventario`;
   }
 
-  getInventarioValue() {
+  getInventarioValue(){
     const products = this.productosService.findAll();
-    const totalValue = products.reduce(
-      (total, product) => total + product.price,
-      0
-    );
+    const totalValue = products.reduce((total, product) => total + product.price, 0);
     return `El valor total del inventario es: ${totalValue}`;
   }
 
