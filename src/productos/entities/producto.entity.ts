@@ -1,16 +1,16 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, ManyToOne, JoinColumn } from "typeorm";
-import { CategoriaEntity } from "../../categoria/entities/categoria.entity";
+import { CategoriaEntity } from "src/categoria/entities/categoria.entity";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity({ name: 'productos' })
+@Entity({name: 'productos'})
 export class ProductoEntity {
 
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'varchar', length: 255 })
+    @Column({type: 'varchar', length: 255})
     nombre: string;
 
-    @Column({ type: 'decimal', precision: 10, scale: 2 })
+    @Column({type: 'decimal', precision: 10, scale: 2})
     precio: number;
 
     @CreateDateColumn({ type: 'timestamp', name: 'fecha_creacion' })
@@ -19,11 +19,10 @@ export class ProductoEntity {
     @UpdateDateColumn({ type: 'timestamp', name: 'fecha_actualizacion' })
     fechaActualizacion: Date;
 
-    @Column({ name: 'categoria_id', nullable: true })
+    @Column({name: 'categoria_id', nullable: true})
     categoriaId: number;
 
-    @ManyToOne(() => CategoriaEntity, (categoria) => categoria.productos,)
+    @ManyToOne(() => CategoriaEntity, (categoria) => categoria.productos)
     @JoinColumn({ name: 'categoria_id' })
-    categoria: CategoriaEntity;
-
+    categorias: CategoriaEntity
 }

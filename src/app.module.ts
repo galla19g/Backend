@@ -8,14 +8,18 @@ import { InventarioModule } from './inventario/inventario.module';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { CategoriaModule } from './categoria/categoria.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ProductoEntity } from './productos/entities/producto.entity';
+import { ProductoCategoriaModule } from './producto_categoria/producto_categoria.module';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([ProductoEntity]),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
     }),
-    ProductosModule, UsuariosModule, InventarioModule, DatabaseModule, CategoriaModule],
+    ProductosModule, UsuariosModule, InventarioModule, DatabaseModule, CategoriaModule, ProductoCategoriaModule],
   controllers: [AppController],
   providers: [AppService, ProductosService],
 })
